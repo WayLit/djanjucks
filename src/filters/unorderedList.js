@@ -1,16 +1,16 @@
-import { runtime } from '..';
-import { conditionalEscape } from '../utilities';
+import { conditionalEscape } from '../utilities'
+import { runtime } from '..'
 
 const traverse = (value, autoescape, tabs = 1) => {
-  let output = '';
-  let prev = null;
-  const tab = '\t'.repeat(tabs);
+  let output = ''
+  let prev = null
+  const tab = '\t'.repeat(tabs)
   value.forEach(item => {
     if (prev !== null && !Array.isArray(item)) {
       if (Array.isArray(prev)) {
-        output += `\n${tab}</li>\n`;
+        output += `\n${tab}</li>\n`
       } else {
-        output += `</li>\n`;
+        output += `</li>\n`
       }
     }
     if (Array.isArray(item)) {
@@ -18,23 +18,23 @@ const traverse = (value, autoescape, tabs = 1) => {
         item,
         autoescape,
         tabs + 1
-      )}\n${tab}</ul>`;
+      )}\n${tab}</ul>`
     } else {
-      output += `${tab}<li>${autoescape ? conditionalEscape(item) : item}`;
+      output += `${tab}<li>${autoescape ? conditionalEscape(item) : item}`
     }
-    prev = item;
-  });
+    prev = item
+  })
   if (prev !== null && !Array.isArray(prev)) {
-    output += `</li>`;
+    output += `</li>`
   } else {
-    output += `\n${tab}</li>`;
+    output += `\n${tab}</li>`
   }
-  return output;
-};
-
-function unorderedList(value) {
-  const { autoescape } = this.env.opts;
-  return runtime.markSafe(traverse(value, autoescape));
+  return output
 }
 
-export default unorderedList;
+function unorderedList(value) {
+  const { autoescape } = this.env.opts
+  return runtime.markSafe(traverse(value, autoescape))
+}
+
+export default unorderedList

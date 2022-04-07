@@ -1,14 +1,14 @@
-import Tag from './Tag';
+import Tag from './Tag'
 
 class PageUrlTag extends Tag {
   constructor() {
-    super();
-    this.tags = ['pageurl'];
+    super()
+    this.tags = ['pageurl']
   }
 
   run(context, attr) {
-    return attr.url;
+    return attr.url
   }
 }
 
-export default PageUrlTag;
+export default PageUrlTag

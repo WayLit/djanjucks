@@ -1,16 +1,16 @@
-import { runtime } from '..';
-import Truncator from '../truncator';
+import Truncator from '../truncator'
+import { runtime } from '..'
 
 const truncateWords = (value, arg) => {
-  const length = parseInt(arg, 10);
-  const parsedValue = String(value);
+  const length = parseInt(arg, 10)
+  const parsedValue = String(value)
   if (length >= parsedValue.length) {
-    return value;
+    return value
   }
 
-  const output = new Truncator(parsedValue).words(length, ' ...');
+  const output = new Truncator(parsedValue).words(length, ' ...')
 
-  return runtime.copySafeness(value, output);
-};
+  return runtime.copySafeness(value, output)
+}
 
-export default truncateWords;
+export default truncateWords

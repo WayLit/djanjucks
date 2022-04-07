@@ -1,20 +1,20 @@
-import { runtime } from '..';
-import Truncator from '../truncator';
+import Truncator from '../truncator'
+import { runtime } from '..'
 
 const truncateCharsHtml = (value, arg) => {
-  const length = parseInt(arg, 10);
-  const parsedValue = String(value);
+  const length = parseInt(arg, 10)
+  const parsedValue = String(value)
   if (length - 3 < 0) {
-    return '...';
+    return '...'
   }
 
   if (length >= parsedValue.length - 3) {
-    return value;
+    return value
   }
 
-  const output = new Truncator(parsedValue).chars(length, true);
+  const output = new Truncator(parsedValue).chars(length, true)
 
-  return runtime.copySafeness(value, output);
-};
+  return runtime.copySafeness(value, output)
+}
 
-export default truncateCharsHtml;
+export default truncateCharsHtml

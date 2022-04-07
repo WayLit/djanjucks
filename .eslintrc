@@ -1,0 +1,39 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "plugins": ["prettier", "import"],
+  "extends": [
+    "standard",
+    "eslint:recommended",
+    "prettier",
+    "prettier/prettier"
+  ],
+  // add your custom rules here
+  "rules": {
+    "prettier/prettier": "error",
+    "no-extra-boolean-cast": "off",
+    "sort-imports": [
+      "error",
+      {
+        "ignoreCase": false,
+        "ignoreDeclarationSort": false,
+        "ignoreMemberSort": false,
+        "memberSyntaxSortOrder": ["none", "all", "multiple", "single"],
+        "allowSeparatedGroups": false
+      }
+    ]
+  },
+  "globals": {
+    "$event": "readonly",
+    "$refs": "readonly",
+    "$component": "readonly",
+    "Spruce": "readonly",
+    "$dispatch": "readonly",
+    "$store": "readonly",
+    "$el": "readonly",
+    "$watch": "readonly"
+  }
+}

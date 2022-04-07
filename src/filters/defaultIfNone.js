@@ -1,7 +1,7 @@
-import { runtime } from '..';
+import { runtime } from '..'
 
 const defaultIfNone = (value, arg) => {
-  return runtime.copySafeness(value, value !== null ? value : arg);
-};
+  return runtime.copySafeness(value, value !== null ? value : arg)
+}
 
-export default defaultIfNone;
+export default defaultIfNone

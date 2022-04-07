@@ -1,21 +1,18 @@
-import { runtime } from '..';
+import { runtime } from '..'
 
 const addSlashes = value => {
   if (value === null || value === undefined) {
-    return '';
+    return ''
   }
 
   if (value && !(value instanceof runtime.SafeString)) {
-    return value;
+    return value
   }
 
   return runtime.copySafeness(
     value,
-    value
-      .replace(/\\/g, '\\\\')
-      .replace(/"/g, '\\"')
-      .replace(/'/g, "\\'")
-  );
-};
+    value.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/'/g, "\\'")
+  )
+}
 
-export default addSlashes;
+export default addSlashes

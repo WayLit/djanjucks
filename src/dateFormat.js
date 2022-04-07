@@ -1,12 +1,12 @@
 import {
   format,
-  getMonth,
   getDaysInMonth,
-  isLeapYear,
-  getISOYear
-} from 'date-fns';
+  getISOYear,
+  getMonth,
+  isLeapYear
+} from 'date-fns'
 
-const DATE_FORMAT_REGEX = /([aAbBcdDeEfFgGhHiIjlLmMnNoOPrsStTUuwWyYzZ])/;
+const DATE_FORMAT_REGEX = /([aAbBcdDeEfFgGhHiIjlLmMnNoOPrsStTUuwWyYzZ])/
 
 const MONTHS_AP = {
   0: 'Jan.',
@@ -21,212 +21,212 @@ const MONTHS_AP = {
   9: 'Oct.',
   10: 'Nov.',
   11: 'Dec.'
-};
+}
 
 class Formatter {
   constructor(data) {
-    this.data = data;
+    this.data = data
   }
 
   format(formatStr) {
-    const pieces = [];
+    const pieces = []
     for (let i = 0; i < formatStr.length; i += 1) {
-      const piece = formatStr.toString()[i];
+      const piece = formatStr.toString()[i]
       // If supported key, format
       if (piece.match(DATE_FORMAT_REGEX) && typeof this[piece] === 'function') {
-        const formatted = this[piece]();
-        pieces.push(formatted);
+        const formatted = this[piece]()
+        pieces.push(formatted)
       } else if (piece === '\\') {
-        pieces.push(formatStr[i + 1]);
-        i += 1;
+        pieces.push(formatStr[i + 1])
+        i += 1
       } else {
-        pieces.push(piece);
+        pieces.push(piece)
       }
     }
 
-    return pieces.join('');
+    return pieces.join('')
   }
 }
 
 class TimeFormat extends Formatter {
   a() {
-    const time = format(this.data, 'a');
-    return `${time[0]}.${time[1]}.`;
+    const time = format(this.data, 'a')
+    return `${time[0]}.${time[1]}.`
   }
 
   A() {
-    return format(this.data, 'A');
+    return format(this.data, 'A')
   }
 
   B() {
-    throw new Error('Time format "B" not implemented.');
+    throw new Error('Time format "B" not implemented.')
   }
 
   e() {
-    return '';
+    return ''
   }
 
   f() {
-    const time = [format(this.data, 'h')];
-    const minutes = format(this.data, 'mm');
+    const time = [format(this.data, 'h')]
+    const minutes = format(this.data, 'mm')
     if (minutes !== '00') {
-      time.push(minutes);
+      time.push(minutes)
     }
-    return time.join(':');
+    return time.join(':')
   }
 
   g() {
-    return format(this.data, 'h');
+    return format(this.data, 'h')
   }
 
   G() {
-    return format(this.data, 'H');
+    return format(this.data, 'H')
   }
 
   h() {
-    return format(this.data, 'hh');
+    return format(this.data, 'hh')
   }
 
   H() {
-    return format(this.data, 'HH');
+    return format(this.data, 'HH')
   }
 
   i() {
-    return format(this.data, 'mm');
+    return format(this.data, 'mm')
   }
 
   O() {
-    return '';
+    return ''
   }
 
   P() {
-    const time = this.f();
-    const timeArray = time.split(':');
-    const range = this.a();
+    const time = this.f()
+    const timeArray = time.split(':')
+    const range = this.a()
 
     if (timeArray.length === 1 && timeArray[0] === '12') {
-      return range === 'a.m.' ? 'midnight' : 'noon';
+      return range === 'a.m.' ? 'midnight' : 'noon'
     }
 
-    return `${time} ${range}`;
+    return `${time} ${range}`
   }
 
   s() {
-    return format(this.data, 'ss');
+    return format(this.data, 'ss')
   }
 
   T() {
-    return '';
+    return ''
   }
 
   u() {
-    return format(this.data, 'SSS');
+    return format(this.data, 'SSS')
   }
 
   Z() {
-    return '';
+    return ''
   }
 }
 
 class DateFormat extends TimeFormat {
   b() {
-    return format(this.data, 'MMM').toLowerCase();
+    return format(this.data, 'MMM').toLowerCase()
   }
 
   c() {
-    return '';
+    return ''
   }
 
   d() {
-    return format(this.data, 'DD');
+    return format(this.data, 'DD')
   }
 
   D() {
-    return format(this.data, 'ddd');
+    return format(this.data, 'ddd')
   }
 
   E() {
     // Does not implement alternative month names
-    return format(this.data, 'MMMM');
+    return format(this.data, 'MMMM')
   }
 
   F() {
-    return format(this.data, 'MMMM');
+    return format(this.data, 'MMMM')
   }
 
   I() {
-    return '';
+    return ''
   }
 
   j() {
-    return format(this.data, 'D');
+    return format(this.data, 'D')
   }
 
   l() {
-    return format(this.data, 'dddd');
+    return format(this.data, 'dddd')
   }
 
   L() {
-    return isLeapYear(this.data);
+    return isLeapYear(this.data)
   }
 
   m() {
-    return format(this.data, 'MM');
+    return format(this.data, 'MM')
   }
 
   M() {
-    return format(this.data, 'MMM');
+    return format(this.data, 'MMM')
   }
 
   n() {
-    return format(this.data, 'M');
+    return format(this.data, 'M')
   }
 
   N() {
-    return MONTHS_AP[getMonth(this.data)];
+    return MONTHS_AP[getMonth(this.data)]
   }
 
   o() {
-    return getISOYear(this.data);
+    return getISOYear(this.data)
   }
 
   r() {
-    return this.format('D, j M Y H:i:s');
+    return this.format('D, j M Y H:i:s')
   }
 
   S() {
-    const day = format(this.data, 'D');
-    const dayWithSuffix = format(this.data, 'Do');
-    return dayWithSuffix.replace(day, '');
+    const day = format(this.data, 'D')
+    const dayWithSuffix = format(this.data, 'Do')
+    return dayWithSuffix.replace(day, '')
   }
 
   t() {
-    return getDaysInMonth(this.data);
+    return getDaysInMonth(this.data)
   }
 
   U() {
-    return '';
+    return ''
   }
 
   w() {
-    return format(this.data, 'd');
+    return format(this.data, 'd')
   }
 
   W() {
-    return format(this.data, 'W');
+    return format(this.data, 'W')
   }
 
   y() {
-    return format(this.data, 'YY');
+    return format(this.data, 'YY')
   }
 
   Y() {
-    return format(this.data, 'YYYY');
+    return format(this.data, 'YYYY')
   }
 
   z() {
-    return format(this.data, 'DDD');
+    return format(this.data, 'DDD')
   }
 }
 
-export { DateFormat, TimeFormat };
+export { DateFormat, TimeFormat }

@@ -1,28 +1,28 @@
-import fs from 'fs';
-import path from 'path';
-import { _prettifyError } from 'nunjucks/src/lib';
-import precompileGlobal from 'nunjucks/src/precompile-global';
-import compiler from './compiler';
-import Environment from './environment';
+import Environment from './environment'
+import { _prettifyError } from 'nunjucks/src/lib'
+import compiler from './compiler'
+import fs from 'fs'
+import path from 'path'
+import precompileGlobal from 'nunjucks/src/precompile-global'
 
 const match = (filename, patterns) => {
   if (!Array.isArray(patterns)) {
-    return false;
+    return false
   }
-  return patterns.some(pattern => filename.match(pattern));
-};
+  return patterns.some(pattern => filename.match(pattern))
+}
 
 const precompileString = (str, opts) => {
-  opts = opts || {};
-  opts.isString = true;
-  const env = opts.env || new Environment([]);
-  const wrapper = opts.wrapper || precompileGlobal;
+  opts = opts || {}
+  opts.isString = true
+  const env = opts.env || new Environment([])
+  const wrapper = opts.wrapper || precompileGlobal
 
   if (!opts.name) {
-    throw new Error('the "name" option is required when compiling a string');
+    throw new Error('the "name" option is required when compiling a string')
   }
-  return wrapper([_precompile(str, opts.name, env)], opts);
-};
+  return wrapper([_precompile(str, opts.name, env)], opts)
+}
 
 const precompile = (input, opts) => {
   // The following options are available:
@@ -39,83 +39,83 @@ const precompile = (input, opts) => {
   //       By default, templates are stored in a global variable used by the runtime.
   //       A custom loader will be necessary to load your custom wrapper.
 
-  opts = opts || {};
-  const env = opts.env || new Environment([]);
-  const wrapper = opts.wrapper || precompileGlobal;
+  opts = opts || {}
+  const env = opts.env || new Environment([])
+  const wrapper = opts.wrapper || precompileGlobal
 
   if (opts.isString) {
-    return precompileString(input, opts);
+    return precompileString(input, opts)
   }
 
-  const pathStats = fs.existsSync(input) && fs.statSync(input);
-  const precompiled = [];
-  const templates = [];
+  const pathStats = fs.existsSync(input) && fs.statSync(input)
+  const precompiled = []
+  const templates = []
 
   const addTemplates = dir => {
     fs.readdirSync(dir).forEach(file => {
-      const filepath = path.join(dir, file);
-      let subpath = filepath.substr(path.join(input, '/').length);
-      const stat = fs.statSync(filepath);
+      const filepath = path.join(dir, file)
+      let subpath = filepath.substr(path.join(input, '/').length)
+      const stat = fs.statSync(filepath)
 
       if (stat && stat.isDirectory()) {
-        subpath += '/';
+        subpath += '/'
         if (!match(subpath, opts.exclude)) {
-          addTemplates(filepath);
+          addTemplates(filepath)
         }
       } else if (match(subpath, opts.include)) {
-        templates.push(filepath);
+        templates.push(filepath)
       }
-    });
-  };
+    })
+  }
 
   if (pathStats.isFile()) {
     precompiled.push(
       _precompile(fs.readFileSync(input, 'utf-8'), opts.name || input, env)
-    );
+    )
   } else if (pathStats.isDirectory()) {
-    addTemplates(input);
+    addTemplates(input)
 
     for (let i = 0; i < templates.length; i++) {
-      const name = templates[i].replace(path.join(input, '/'), '');
+      const name = templates[i].replace(path.join(input, '/'), '')
 
       try {
         precompiled.push(
           _precompile(fs.readFileSync(templates[i], 'utf-8'), name, env)
-        );
+        )
       } catch (e) {
         if (opts.force) {
           // Don't stop generating the output if we're
           // forcing compilation.
-          console.error(e); // eslint-disable-line no-console
+          console.error(e) // eslint-disable-line no-console
         } else {
-          throw e;
+          throw e
         }
       }
     }
   }
 
-  return wrapper(precompiled, opts);
-};
+  return wrapper(precompiled, opts)
+}
 
 const _precompile = (str, name, env) => {
-  env = env || new Environment([]);
+  env = env || new Environment([])
 
-  const asyncFilters = env.asyncFilters;
-  const extensions = env.extensionsList;
-  let template;
+  const asyncFilters = env.asyncFilters
+  const extensions = env.extensionsList
+  let template
 
-  name = name.replace(/\\/g, '/');
+  name = name.replace(/\\/g, '/')
 
   try {
-    template = compiler.compile(str, asyncFilters, extensions, name, env.opts);
+    template = compiler.compile(str, asyncFilters, extensions, name, env.opts)
   } catch (err) {
-    throw _prettifyError(name, false, err);
+    throw _prettifyError(name, false, err)
   }
 
   return {
     name: name,
     template: template
-  };
-};
+  }
+}
 
-export { precompile, precompileString };
+export { precompile, precompileString }

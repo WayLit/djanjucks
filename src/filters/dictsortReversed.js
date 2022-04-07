@@ -1,9 +1,9 @@
-import dictsort from './dictsort';
+import dictsort from './dictsort'
 
 const dictsortReversed = (value, key) => {
-  const sorted = dictsort(value, key);
+  const sorted = dictsort(value, key)
 
-  return sorted.reverse();
-};
+  return sorted.reverse()
+}
 
-export default dictsortReversed;
+export default dictsortReversed

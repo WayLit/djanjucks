@@ -1,17 +1,17 @@
 class ResetCycleTag {
   constructor() {
-    this.tags = ['resetcycle'];
+    this.tags = ['resetcycle']
   }
 
   parse(parser, nodes) {
-    const token = parser.nextToken();
-    const node = new nodes.ResetCycle(token.lineno, token.colno);
-    node.args = parser.parseSignature(null, true);
+    const token = parser.nextToken()
+    const node = new nodes.ResetCycle(token.lineno, token.colno)
+    node.args = parser.parseSignature(null, true)
 
-    parser.advanceAfterBlockEnd(token.value);
+    parser.advanceAfterBlockEnd(token.value)
 
-    return node;
+    return node
   }
 }
 
-export default ResetCycleTag;
+export default ResetCycleTag

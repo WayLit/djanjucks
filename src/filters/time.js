@@ -1,8 +1,8 @@
-import { TimeFormat } from '../dateFormat';
+import { TimeFormat } from '../dateFormat'
 
 const timeFilter = (time, timeFormat) => {
-  const formatter = new TimeFormat(time);
-  return formatter.format(timeFormat);
-};
+  const formatter = new TimeFormat(time)
+  return formatter.format(timeFormat)
+}
 
-export default timeFilter;
+export default timeFilter

@@ -1,5 +1,5 @@
-import { runtime } from '..';
-import { translateMap } from '../utilities';
+import { runtime } from '..'
+import { translateMap } from '../utilities'
 
 const PHONE_NUMERIC_MAP = {
   a: '2',
@@ -28,13 +28,13 @@ const PHONE_NUMERIC_MAP = {
   x: '9',
   y: '9',
   z: '9'
-};
+}
 
 const phone2Numeric = value => {
   return runtime.copySafeness(
     value,
     translateMap(value.toLowerCase(), PHONE_NUMERIC_MAP)
-  );
-};
+  )
+}
 
-export default phone2Numeric;
+export default phone2Numeric

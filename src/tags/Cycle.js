@@ -1,16 +1,16 @@
 class CycleTag {
   constructor() {
-    this.tags = ['cycle'];
+    this.tags = ['cycle']
   }
 
   parse(parser, nodes) {
-    const token = parser.nextToken();
-    const node = new nodes.Cycle(token.lineno, token.colno);
-    const args = parser.parseSignature(null, true);
-    node.silent = false;
+    const token = parser.nextToken()
+    const node = new nodes.Cycle(token.lineno, token.colno)
+    const args = parser.parseSignature(null, true)
+    node.silent = false
 
     // Check to see if there is a target
-    const targetIndex = args.children.findIndex(arg => arg.value === 'as');
+    const targetIndex = args.children.findIndex(arg => arg.value === 'as')
 
     // If we have the "as" arg we should expect a named target
     if (targetIndex !== -1) {
@@ -18,13 +18,13 @@ class CycleTag {
       const target = args.children.splice(
         targetIndex,
         args.children.length - targetIndex
-      );
+      )
 
       if (target.length === 1) {
-        parser.fail(`cycle: Expected cycle name after keyword "as".`);
+        parser.fail(`cycle: Expected cycle name after keyword "as".`)
       }
       // We can assume that we have a target
-      node.target = target[1];
+      node.target = target[1]
 
       // Check if we have more than 1 flag
       if (target.length > 3) {
@@ -33,25 +33,23 @@ class CycleTag {
             .slice(2)
             .map(x => x.value)
             .join(', ')}]".`
-        );
+        )
       } else if (target.length === 3) {
         if (target[2].value !== 'silent') {
           parser.fail(
-            `cycle: Only "silent" flag is allowed after cycle name, not "${
-              target[2].value
-            }".`
-          );
+            `cycle: Only "silent" flag is allowed after cycle name, not "${target[2].value}".`
+          )
         } else {
-          node.silent = true;
+          node.silent = true
         }
       }
     }
 
-    node.args = args;
-    parser.advanceAfterBlockEnd(token.value);
+    node.args = args
+    parser.advanceAfterBlockEnd(token.value)
 
-    return node;
+    return node
   }
 }
 
-export default CycleTag;
+export default CycleTag

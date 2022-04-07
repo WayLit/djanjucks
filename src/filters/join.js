@@ -1,20 +1,20 @@
-import { runtime } from '..';
-import { escapeHtml } from '../utilities';
+import { escapeHtml } from '../utilities'
+import { runtime } from '..'
 
 // Nunjucks' join filter doesn't implement safe strings.
 // But this guy does.
-const join = function(value, arg) {
-  const { autoescape } = this.env.opts;
+const join = function (value, arg) {
+  const { autoescape } = this.env.opts
 
   if (autoescape) {
     value = value.map(item => {
-      return item instanceof runtime.SafeString ? item : escapeHtml(item);
-    });
+      return item instanceof runtime.SafeString ? item : escapeHtml(item)
+    })
   }
 
-  const delimeter = arg instanceof runtime.SafeString ? arg : escapeHtml(arg);
+  const delimeter = arg instanceof runtime.SafeString ? arg : escapeHtml(arg)
 
-  return runtime.markSafe(value.join(delimeter));
-};
+  return runtime.markSafe(value.join(delimeter))
+}
 
-export default join;
+export default join

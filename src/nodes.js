@@ -1,4 +1,4 @@
-import nodes from 'nunjucks/src/nodes';
+import nodes from 'nunjucks/src/nodes'
 
 const djanjucksNodes = {
   ...nodes,
@@ -18,6 +18,6 @@ const djanjucksNodes = {
     fields: ['body', 'args', 'target']
   }),
   SafeLiteral: nodes.Value.extend('SafeLiteral')
-};
+}
 
-export default djanjucksNodes;
+export default djanjucksNodes

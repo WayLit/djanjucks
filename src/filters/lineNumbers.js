@@ -1,11 +1,11 @@
-import { runtime } from '..';
-import { escapeHtml } from '../utilities';
+import { escapeHtml } from '../utilities'
+import { runtime } from '..'
 
 function lineNumbers(value) {
   const autoescape =
-    this.env.opts.autoescape && !(value instanceof runtime.SafeString);
-  const lines = String(value).split('\n');
-  const width = String(String(lines.length).length);
+    this.env.opts.autoescape && !(value instanceof runtime.SafeString)
+  const lines = String(value).split('\n')
+  const width = String(String(lines.length).length)
 
   return runtime.markSafe(
     lines
@@ -16,7 +16,7 @@ function lineNumbers(value) {
           }`
       )
       .join('\n')
-  );
+  )
 }
 
-export default lineNumbers;
+export default lineNumbers

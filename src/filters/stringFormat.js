@@ -1,9 +1,9 @@
-import { sprintf } from 'sprintf-js';
-import { runtime } from '..';
+import { runtime } from '..'
+import { sprintf } from 'sprintf-js'
 
 const stringFormat = (value, arg) => {
-  const output = sprintf(`%${arg}`, value);
-  return runtime.copySafeness(value, output);
-};
+  const output = sprintf(`%${arg}`, value)
+  return runtime.copySafeness(value, output)
+}
 
-export default stringFormat;
+export default stringFormat

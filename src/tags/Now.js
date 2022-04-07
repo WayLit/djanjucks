@@ -1,15 +1,15 @@
-import Tag from './Tag';
-import { date } from '../filters';
+import Tag from './Tag'
+import { date } from '../filters'
 
 class NowTag extends Tag {
   constructor() {
-    super();
-    this.tags = ['now'];
+    super()
+    this.tags = ['now']
   }
 
   run(context, format) {
-    return date(new Date(), format);
+    return date(new Date(), format)
   }
 }
 
-export default NowTag;
+export default NowTag

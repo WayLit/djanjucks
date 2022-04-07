@@ -1,38 +1,38 @@
-import humanizeDuration from 'humanize-duration';
-import { avoidWrapping } from '../utilities';
+import { avoidWrapping } from '../utilities'
+import humanizeDuration from 'humanize-duration'
 
 const timeSince = (start, end) => {
-  let startDate = start;
-  let endDate = end;
+  let startDate = start
+  let endDate = end
 
   if (!(start instanceof Date)) {
-    startDate = new Date(start);
+    startDate = new Date(start)
   }
 
   if (end === undefined) {
-    endDate = new Date();
+    endDate = new Date()
   } else if (!(end instanceof Date)) {
-    endDate = new Date(end);
+    endDate = new Date(end)
   }
 
   if (
     startDate.toString() === 'Invalid Date' ||
     endDate.toString() === 'Invalid Date'
   ) {
-    return '';
+    return ''
   }
 
   if (startDate > endDate) {
-    return avoidWrapping('0 minutes');
+    return avoidWrapping('0 minutes')
   }
 
   const diff = humanizeDuration(startDate - endDate, {
     units: ['y', 'mo', 'w', 'd', 'h', 'm'],
     largest: 2,
     round: true
-  });
+  })
 
-  return avoidWrapping(diff);
-};
+  return avoidWrapping(diff)
+}
 
-export default timeSince;
+export default timeSince

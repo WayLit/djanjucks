@@ -1,14 +1,14 @@
 const lengthIs = (value, arg) => {
   if (value.length === undefined) {
-    return '';
+    return ''
   }
 
-  const length = parseFloat(arg);
+  const length = parseFloat(arg)
   if (length % 1 !== 0) {
-    return '';
+    return ''
   }
 
-  return value.length === parseInt(arg, 10);
-};
+  return value.length === parseInt(arg, 10)
+}
 
-export default lengthIs;
+export default lengthIs

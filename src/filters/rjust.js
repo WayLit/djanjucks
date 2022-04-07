@@ -1,7 +1,7 @@
-import { runtime } from '..';
+import { runtime } from '..'
 
 const rjust = (value, width) => {
-  return runtime.copySafeness(value, String(value).padStart(width, ' '));
-};
+  return runtime.copySafeness(value, String(value).padStart(width, ' '))
+}
 
-export default rjust;
+export default rjust
