@@ -1,4 +1,4 @@
-import djanjucks from '../../src';
+import djanjucks from '../../src'
 
 describe('debug tag', () => {
   it('outputs the context', () => {
@@ -10,8 +10,8 @@ describe('debug tag', () => {
       },
       number: 100,
       bool: true
-    });
+    })
 
-    expect(result).toMatchSnapshot();
-  });
-});
+    expect(result).toMatchSnapshot()
+  })
+})

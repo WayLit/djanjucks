@@ -1,4 +1,4 @@
-import djanjucks from '../../src';
+import djanjucks from '../../src'
 
 describe('truncatewords_html filter', () => {
   it('returns empty string if arg is 0', () => {
@@ -7,9 +7,9 @@ describe('truncatewords_html filter', () => {
       {
         value: '<p>one <a href="#">two - three <br>four</a> five</p>'
       }
-    );
-    expect(result).toEqual('');
-  });
+    )
+    expect(result).toEqual('')
+  })
 
   it('removes other html if beyond truncate', () => {
     const result = djanjucks.renderString(
@@ -17,9 +17,9 @@ describe('truncatewords_html filter', () => {
       {
         value: '<p>one <a href="#">two - three <br>four</a> five</p>'
       }
-    );
-    expect(result).toEqual('<p>one <a href="#">two ...</a></p>');
-  });
+    )
+    expect(result).toEqual('<p>one <a href="#">two ...</a></p>')
+  })
 
   it('handles self closing tags', () => {
     const result = djanjucks.renderString(
@@ -27,11 +27,11 @@ describe('truncatewords_html filter', () => {
       {
         value: '<p>one <a href="#">two - three <br>four</a> five</p>'
       }
-    );
+    )
     expect(result).toEqual(
       '<p>one <a href="#">two - three <br>four ...</a></p>'
-    );
-  });
+    )
+  })
 
   it('returns the entire string if arg is larger than word count', () => {
     const result = djanjucks.renderString(
@@ -39,11 +39,11 @@ describe('truncatewords_html filter', () => {
       {
         value: '<p>one <a href="#">two - three <br>four</a> five</p>'
       }
-    );
+    )
     expect(result).toEqual(
       '<p>one <a href="#">two - three <br>four</a> five</p>'
-    );
-  });
+    )
+  })
 
   it('supports unicodes', () => {
     const result = djanjucks.renderString(
@@ -51,9 +51,9 @@ describe('truncatewords_html filter', () => {
       {
         value: '\xc5ngstr\xf6m was here'
       }
-    );
-    expect(result).toEqual('\xc5ngstr\xf6m ...');
-  });
+    )
+    expect(result).toEqual('\xc5ngstr\xf6m ...')
+  })
 
   it('just works', () => {
     const result = djanjucks.renderString(
@@ -61,11 +61,9 @@ describe('truncatewords_html filter', () => {
       {
         value: '<i>Buenos d&iacute;as! &#x00bf;C&oacute;mo est&aacute;?</i>'
       }
-    );
-    expect(result).toEqual(
-      '<i>Buenos d&iacute;as! &#x00bf;C&oacute;mo ...</i>'
-    );
-  });
+    )
+    expect(result).toEqual('<i>Buenos d&iacute;as! &#x00bf;C&oacute;mo ...</i>')
+  })
 
   it('returns the entire string if arf is not a number', () => {
     const result = djanjucks.renderString(
@@ -73,7 +71,7 @@ describe('truncatewords_html filter', () => {
       {
         value: '<p>string</p>'
       }
-    );
-    expect(result).toEqual('<p>string</p>');
-  });
-});
+    )
+    expect(result).toEqual('<p>string</p>')
+  })
+})

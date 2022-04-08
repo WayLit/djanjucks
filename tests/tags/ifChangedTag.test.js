@@ -1,4 +1,4 @@
-import djanjucks from '../../src';
+import djanjucks from '../../src'
 
 describe('ifchanged tag', () => {
   it('renders on first evaluation', () => {
@@ -7,9 +7,9 @@ describe('ifchanged tag', () => {
       {
         items: ['A', 'B']
       }
-    );
-    expect(result).toEqual('AB');
-  });
+    )
+    expect(result).toEqual('AB')
+  })
 
   it('renders only if values have changed', () => {
     const result = djanjucks.renderString(
@@ -17,9 +17,9 @@ describe('ifchanged tag', () => {
       {
         items: ['A', 'A', 'B', 'A', 'C', 'C']
       }
-    );
-    expect(result).toEqual('ABAC');
-  });
+    )
+    expect(result).toEqual('ABAC')
+  })
 
   it('renders in nested for loops', () => {
     const result = djanjucks.renderString(
@@ -30,10 +30,10 @@ describe('ifchanged tag', () => {
         num: [1, 2, 3],
         numx: [2, 2, 2]
       }
-    );
+    )
 
-    expect(result.replace(/\n/g, '')).toEqual('122232');
-  });
+    expect(result.replace(/\n/g, '')).toEqual('122232')
+  })
 
   it('renders in nested for loops', () => {
     const result = djanjucks.renderString(
@@ -44,10 +44,10 @@ describe('ifchanged tag', () => {
         num: [1, 1, 1],
         numx: [1, 2, 3]
       }
-    );
+    )
 
-    expect(result.replace(/\n/g, '')).toEqual('1123123123');
-  });
+    expect(result.replace(/\n/g, '')).toEqual('1123123123')
+  })
 
   it('renders in deeply nested for loops', () => {
     const result = djanjucks.renderString(
@@ -62,10 +62,10 @@ describe('ifchanged tag', () => {
         numx: [2, 2, 2],
         numy: [3, 3, 3]
       }
-    );
+    )
 
-    expect(result.replace(/\n/g, '')).toEqual('1233323332333');
-  });
+    expect(result.replace(/\n/g, '')).toEqual('1233323332333')
+  })
 
   it('evaluates key value pairs in loops', () => {
     const result = djanjucks.renderString(
@@ -74,14 +74,25 @@ describe('ifchanged tag', () => {
 {% endif %}{% endfor %}{% endfor %}`,
       {
         datalist: [
-          [[1, 'a'], [1, 'a'], [0, 'b'], [1, 'c']],
-          [[0, 'a'], [1, 'c'], [1, 'd'], [1, 'd'], [0, 'e']]
+          [
+            [1, 'a'],
+            [1, 'a'],
+            [0, 'b'],
+            [1, 'c']
+          ],
+          [
+            [0, 'a'],
+            [1, 'c'],
+            [1, 'd'],
+            [1, 'd'],
+            [0, 'e']
+          ]
         ]
       }
-    );
+    )
 
-    expect(result.replace(/\n/g, '')).toEqual('accd');
-  });
+    expect(result.replace(/\n/g, '')).toEqual('accd')
+  })
 
   it('evaluates single arg', () => {
     const result = djanjucks.renderString(
@@ -90,9 +101,9 @@ describe('ifchanged tag', () => {
       {
         num: [1, 2, 3]
       }
-    );
-    expect(result.replace(/\n/g, '')).toEqual('..1..2..3');
-  });
+    )
+    expect(result.replace(/\n/g, '')).toEqual('..1..2..3')
+  })
 
   it('evaluates single arg', () => {
     const result = djanjucks.renderString(
@@ -102,9 +113,9 @@ describe('ifchanged tag', () => {
         num: [1, 2, 3],
         numx: [5, 6, 7]
       }
-    );
-    expect(result.replace(/\n/g, '')).toEqual('..567..567..567');
-  });
+    )
+    expect(result.replace(/\n/g, '')).toEqual('..567..567..567')
+  })
 
   it('evaluates multiple args', () => {
     const result = djanjucks.renderString(
@@ -115,9 +126,9 @@ describe('ifchanged tag', () => {
         num: [1, 1, 2],
         numx: [5, 6, 6]
       }
-    );
-    expect(result.replace(/\n/g, '')).toEqual('156156256');
-  });
+    )
+    expect(result.replace(/\n/g, '')).toEqual('156156256')
+  })
 
   it('evaluates multiple args individually', () => {
     const result = djanjucks.renderString(
@@ -125,11 +136,14 @@ describe('ifchanged tag', () => {
 {% for h in d.hours %}{% ifchanged d h %}{{ h }}{% endifchanged %}
 {% endfor %}{% endfor %}`,
       {
-        days: [{ hours: [1, 2, 3], day: 1 }, { hours: [3], day: 2 }]
+        days: [
+          { hours: [1, 2, 3], day: 1 },
+          { hours: [3], day: 2 }
+        ]
       }
-    );
-    expect(result.replace(/\n/g, '')).toEqual('112323');
-  });
+    )
+    expect(result.replace(/\n/g, '')).toEqual('112323')
+  })
 
   it('renders the else clause if unchanged', () => {
     const result = djanjucks.renderString(
@@ -139,11 +153,11 @@ describe('ifchanged tag', () => {
       {
         ids: [1, 1, 2, 2, 2, 3]
       }
-    );
+    )
     expect(result.replace(/\n/g, '')).toEqual(
       '1-first,1-other,2-first,2-other,2-other,3-first,'
-    );
-  });
+    )
+  })
 
   it('evaluates args with filters', () => {
     const result = djanjucks.renderString(
@@ -153,7 +167,7 @@ describe('ifchanged tag', () => {
       {
         list: ['a', 'A', 'C', 'a', 'D', 'd']
       }
-    );
-    expect(result.replace(/\n/g, '')).toEqual('aCaD');
-  });
-});
+    )
+    expect(result.replace(/\n/g, '')).toEqual('aCaD')
+  })
+})

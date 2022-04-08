@@ -1,4 +1,4 @@
-import djanjucks from '../../src';
+import djanjucks from '../../src'
 
 describe('safeseq filter', () => {
   it('marks items in arrays as safe', () => {
@@ -7,9 +7,9 @@ describe('safeseq filter', () => {
       {
         value: ['&', '<']
       }
-    );
-    expect(result).toEqual('&amp;, &lt; -- &, <');
-  });
+    )
+    expect(result).toEqual('&amp;, &lt; -- &, <')
+  })
 
   it('is not affected by global autoescape', () => {
     const result = djanjucks.renderString(
@@ -17,9 +17,9 @@ describe('safeseq filter', () => {
       {
         value: ['&', '<']
       }
-    );
-    expect(result).toEqual('&amp;, &lt; -- &, <');
-  });
+    )
+    expect(result).toEqual('&amp;, &lt; -- &, <')
+  })
 
   it('is not affected by global autoescape', () => {
     const result = djanjucks.renderString(
@@ -27,7 +27,7 @@ describe('safeseq filter', () => {
       {
         value: ['&', '<']
       }
-    );
-    expect(result).toEqual('&, < -- &, <');
-  });
-});
+    )
+    expect(result).toEqual('&, < -- &, <')
+  })
+})

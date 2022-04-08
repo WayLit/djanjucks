@@ -1,4 +1,4 @@
-import djanjucks from '../../src';
+import djanjucks from '../../src'
 
 const FILE_FORMATS = {
   '': '0\xa0bytes',
@@ -16,15 +16,15 @@ const FILE_FORMATS = {
   1125899906842624: '1.0\xa0PB',
   2251799813680000000: '2000.0\xa0PB',
   '-4849292038': '-4.5\xa0GB'
-};
+}
 
 describe('filesizeformat filter', () => {
   Object.keys(FILE_FORMATS).forEach(bytes => {
     it(`formats "${bytes}"`, () => {
       const result = djanjucks.renderString('{{ value|filesizeformat }}', {
         value: bytes
-      });
-      expect(result).toEqual(FILE_FORMATS[bytes]);
-    });
-  });
-});
+      })
+      expect(result).toEqual(FILE_FORMATS[bytes])
+    })
+  })
+})

@@ -1,4 +1,4 @@
-import djanjucks, { runtime } from '../../src';
+import djanjucks, { runtime } from '../../src'
 
 describe('stringformat filter', () => {
   it('renders value and preserves autoescape', () => {
@@ -8,9 +8,9 @@ describe('stringformat filter', () => {
         a: 'a<b',
         b: runtime.markSafe('a<b')
       }
-    );
-    expect(result).toEqual('.  a&lt;b. .  a<b.');
-  });
+    )
+    expect(result).toEqual('.  a&lt;b. .  a<b.')
+  })
 
   it('renders value and preserves global autoescape', () => {
     const result = djanjucks.renderString(
@@ -19,23 +19,23 @@ describe('stringformat filter', () => {
         a: 'a<b',
         b: runtime.markSafe('a<b')
       }
-    );
-    expect(result).toEqual('.  a<b. .  a<b.');
-  });
+    )
+    expect(result).toEqual('.  a<b. .  a<b.')
+  })
 
   it('renders number with padding', () => {
     const result = djanjucks.renderString('{{ value|stringformat:"03d" }}', {
       value: 1
-    });
-    expect(result).toEqual('001');
-  });
+    })
+    expect(result).toEqual('001')
+  })
 
   it('renders array as string', () => {
     const result = djanjucks.renderString('{{ value|stringformat:"s" }}', {
       value: [1, null, 'test']
-    });
-    expect(result).toEqual('1,,test');
-  });
+    })
+    expect(result).toEqual('1,,test')
+  })
 
   it('renders object as string', () => {
     const result = djanjucks.renderString(
@@ -44,7 +44,7 @@ describe('stringformat filter', () => {
         a: { 1: 'a&b' },
         b: { 2: runtime.markSafe('a&b') }
       }
-    );
-    expect(result).toEqual('[object Object]-[object Object]');
-  });
-});
+    )
+    expect(result).toEqual('[object Object]-[object Object]')
+  })
+})

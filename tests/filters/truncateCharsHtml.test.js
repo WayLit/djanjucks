@@ -1,4 +1,4 @@
-import djanjucks from '../../src';
+import djanjucks from '../../src'
 
 describe('truncatechars_html filter', () => {
   it('returns ellipsis when length is 0 for some reason', () => {
@@ -7,9 +7,9 @@ describe('truncatechars_html filter', () => {
       {
         value: '<p>one <a href="#">two - three <br>four</a> five</p>'
       }
-    );
-    expect(result).toEqual('...');
-  });
+    )
+    expect(result).toEqual('...')
+  })
 
   it('removes other html if beyond truncate', () => {
     const result = djanjucks.renderString(
@@ -17,9 +17,9 @@ describe('truncatechars_html filter', () => {
       {
         value: '<p>one <a href="#">two - three <br>four</a> five</p>'
       }
-    );
-    expect(result).toEqual('<p>one...</p>');
-  });
+    )
+    expect(result).toEqual('<p>one...</p>')
+  })
 
   it('does not add ellipsis if unnecessary', () => {
     const result = djanjucks.renderString(
@@ -27,11 +27,11 @@ describe('truncatechars_html filter', () => {
       {
         value: '<p>one <a href="#">two - three <br>four</a> five</p>'
       }
-    );
+    )
     expect(result).toEqual(
       '<p>one <a href="#">two - three <br>four</a> five</p>'
-    );
-  });
+    )
+  })
 
   it('supports unicodes', () => {
     const result = djanjucks.renderString(
@@ -39,9 +39,9 @@ describe('truncatechars_html filter', () => {
       {
         value: '<b>\xc5ngstr\xf6m</b> was here'
       }
-    );
-    expect(result).toEqual('<b>\xc5n...</b>');
-  });
+    )
+    expect(result).toEqual('<b>\xc5n...</b>')
+  })
 
   it('just works', () => {
     const result = djanjucks.renderString(
@@ -49,7 +49,7 @@ describe('truncatechars_html filter', () => {
       {
         value: 'a<b>b</b>c'
       }
-    );
-    expect(result).toEqual('a<b>b</b>c');
-  });
-});
+    )
+    expect(result).toEqual('a<b>b</b>c')
+  })
+})

@@ -1,52 +1,52 @@
-import djanjucks, { runtime } from '../../src';
+import djanjucks, { runtime } from '../../src'
 
 describe('cycle tag', () => {
   it('requires a target if provided as keyword', () => {
     expect(() => {
-      djanjucks.renderString('{% cycle "a" as %}');
-    }).toThrow('cycle: Expected cycle name after keyword "as".');
-  });
+      djanjucks.renderString('{% cycle "a" as %}')
+    }).toThrow('cycle: Expected cycle name after keyword "as".')
+  })
 
   it('requires at least one argument', () => {
     expect(() => {
-      djanjucks.renderString('{% cycle %}');
-    }).toThrow('cycle: Requires at least one argument.');
-  });
+      djanjucks.renderString('{% cycle %}')
+    }).toThrow('cycle: Requires at least one argument.')
+  })
 
   it('only accepets single flag', () => {
     expect(() => {
-      djanjucks.renderString('{% cycle "a" as a silent test %}');
+      djanjucks.renderString('{% cycle "a" as a silent test %}')
     }).toThrow(
       'cycle: Only a single "silent" flag is allowed, not "[silent, test]".'
-    );
-  });
+    )
+  })
 
   it('looks for named cycles in template', () => {
     expect(() => {
-      djanjucks.renderString('{% cycle a %}');
-    }).toThrow('cycle: No named cycles in template. "a" is not defined.');
-  });
+      djanjucks.renderString('{% cycle a %}')
+    }).toThrow('cycle: No named cycles in template. "a" is not defined.')
+  })
 
   it('can add the named cycle to context', () => {
     const result = djanjucks.renderString(
       '{% cycle "a" "b" "c" as foo %}{% cycle foo %}'
-    );
-    expect(result).toEqual('ab');
-  });
+    )
+    expect(result).toEqual('ab')
+  })
 
   it('can chain the same named cycle [2]', () => {
     const result = djanjucks.renderString(
       '{% cycle "a" "b" "c" as foo %}{% cycle foo %}{% cycle foo %}'
-    );
-    expect(result).toEqual('abc');
-  });
+    )
+    expect(result).toEqual('abc')
+  })
 
   it('can chain the same named cycle [3]', () => {
     const result = djanjucks.renderString(
       '{% cycle "a" "b" "c" as foo %}{% cycle foo %}{% cycle foo %}{% cycle foo %}'
-    );
-    expect(result).toEqual('abca');
-  });
+    )
+    expect(result).toEqual('abca')
+  })
 
   it('cycles in a forloop', () => {
     const result = djanjucks.renderString(
@@ -54,9 +54,9 @@ describe('cycle tag', () => {
       {
         value: [0, 1, 2, 3, 4]
       }
-    );
-    expect(result).toEqual('a0,b1,a2,b3,a4,');
-  });
+    )
+    expect(result).toEqual('a0,b1,a2,b3,a4,')
+  })
 
   it('takes multiple context vars as arguments', () => {
     const result = djanjucks.renderString(
@@ -65,9 +65,9 @@ describe('cycle tag', () => {
         one: '1',
         two: '2'
       }
-    );
-    expect(result).toEqual('12');
-  });
+    )
+    expect(result).toEqual('12')
+  })
 
   it('takes multiple context vars as arguments in a forloop', () => {
     const result = djanjucks.renderString(
@@ -77,9 +77,9 @@ describe('cycle tag', () => {
         one: 'a',
         two: 'b'
       }
-    );
-    expect(result).toEqual('a0,b1,a2,b3,a4,');
-  });
+    )
+    expect(result).toEqual('a0,b1,a2,b3,a4,')
+  })
 
   it('filters arguments', () => {
     const result = djanjucks.renderString(
@@ -88,31 +88,31 @@ describe('cycle tag', () => {
         one: 'A',
         two: '2'
       }
-    );
-    expect(result).toEqual('a2');
-  });
+    )
+    expect(result).toEqual('a2')
+  })
 
   it('supresses output with silent', () => {
     const result = djanjucks.renderString(
       '{% cycle "a" "b" "c" as abc silent %}{% cycle abc %}{% cycle abc %}{% cycle abc %}{% cycle abc %}'
-    );
-    expect(result).toEqual('');
-  });
+    )
+    expect(result).toEqual('')
+  })
 
   it('only accepts silent as a flag', () => {
     expect(() => {
-      djanjucks.renderString('{% cycle "a" "b" "c" as abc flag %}');
+      djanjucks.renderString('{% cycle "a" "b" "c" as abc flag %}')
     }).toThrow(
       'cycle: Only "silent" flag is allowed after cycle name, not "flag".'
-    );
-  });
+    )
+  })
 
   it('does not silence if named cycle is "silent"', () => {
     const result = djanjucks.renderString(
       '{% cycle "a" "b" as silent %}{% cycle silent %}'
-    );
-    expect(result).toEqual('ab');
-  });
+    )
+    expect(result).toEqual('ab')
+  })
 
   it('escapes preserves autoescape', () => {
     const result = djanjucks.renderString(
@@ -121,9 +121,9 @@ describe('cycle tag', () => {
         one: 'A & B',
         two: runtime.markSafe('C & D')
       }
-    );
-    expect(result).toEqual('A &amp; B & C & D');
-  });
+    )
+    expect(result).toEqual('A &amp; B & C & D')
+  })
 
   it('escapes preserves autoescape with off', () => {
     const result = djanjucks.renderString(
@@ -132,9 +132,9 @@ describe('cycle tag', () => {
         one: 'A & B',
         two: runtime.markSafe('C & D')
       }
-    );
-    expect(result).toEqual('A & B & C & D');
-  });
+    )
+    expect(result).toEqual('A & B & C & D')
+  })
 
   it('cycles in a loop', () => {
     const result = djanjucks.renderString(
@@ -142,9 +142,9 @@ describe('cycle tag', () => {
       {
         values: [1, 2, 3, 4]
       }
-    );
-    expect(result).toEqual('A1B2C3A4');
-  });
+    )
+    expect(result).toEqual('A1B2C3A4')
+  })
 
   it('cycles in a loop with target', () => {
     const result = djanjucks.renderString(
@@ -152,16 +152,16 @@ describe('cycle tag', () => {
       {
         values: [1, 2, 3, 4]
       }
-    );
-    expect(result).toEqual('1A2B3C4A');
-  });
+    )
+    expect(result).toEqual('1A2B3C4A')
+  })
 
   it('cycles a lookup value with target', () => {
     const result = djanjucks.renderString('{% cycle value as foo %}', {
       value: '<'
-    });
-    expect(result).toEqual('&lt;');
-  });
+    })
+    expect(result).toEqual('&lt;')
+  })
 
   it('allows filtering on arguments', () => {
     const result = djanjucks.renderString(
@@ -170,9 +170,9 @@ describe('cycle tag', () => {
         a: '<',
         b: '>'
       }
-    );
-    expect(result).toEqual('<&gt;');
-  });
+    )
+    expect(result).toEqual('<&gt;')
+  })
 
   it('supports ifchanged', () => {
     const result = djanjucks.renderString(
@@ -190,9 +190,9 @@ describe('cycle tag', () => {
       {
         values: [1, 2, 3, 4, 5, 6, 7, 8, 8, 8, 9, 9]
       }
-    );
-    expect(result).toEqual('bcabcabcccaa');
-  });
+    )
+    expect(result).toEqual('bcabcabcccaa')
+  })
 
   // it('should not reset when used in "with" tag', () => {
   //   const result = djanjucks.renderString(
@@ -216,4 +216,4 @@ describe('cycle tag', () => {
   //   );
   //   expect(result).toEqual('bcabcabcccaa');
   // });
-});
+})

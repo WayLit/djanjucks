@@ -1,4 +1,4 @@
-import djanjucks from '../../src';
+import djanjucks from '../../src'
 
 describe('for tag', () => {
   it('iterates a list', () => {
@@ -7,10 +7,10 @@ describe('for tag', () => {
       {
         items: ['A', 'B', 'C']
       }
-    );
+    )
 
-    expect(result).toEqual('ABC');
-  });
+    expect(result).toEqual('ABC')
+  })
 
   it('iterates an object', () => {
     const result = djanjucks.renderString(
@@ -22,21 +22,25 @@ describe('for tag', () => {
           mayo: 0
         }
       }
-    );
+    )
 
-    expect(result).toEqual('ketchup:1,mustard:2,mayo:0,');
-  });
+    expect(result).toEqual('ketchup:1,mustard:2,mayo:0,')
+  })
 
   it('unpacks variables', () => {
     const result = djanjucks.renderString(
       `{% for x, y, z in items %}{{ x }},{{ y }},{{ z }}:{% endfor %}`,
       {
-        items: [[0, 1, 2], [5, 6, 7], [12, 13, 14]]
+        items: [
+          [0, 1, 2],
+          [5, 6, 7],
+          [12, 13, 14]
+        ]
       }
-    );
+    )
 
-    expect(result).toEqual('0,1,2:5,6,7:12,13,14:');
-  });
+    expect(result).toEqual('0,1,2:5,6,7:12,13,14:')
+  })
 
   it('has access to special variables', () => {
     const result = djanjucks.renderString(
@@ -47,7 +51,7 @@ describe('for tag', () => {
       {
         items: ['A', 'B', 'C']
       }
-    );
+    )
 
     expect(result.trim()).toEqual(`1:0:3:2
 true:false:3
@@ -56,8 +60,8 @@ true:false:3
 false:false:3
 
 3:2:1:0
-false:true:3`);
-  });
+false:true:3`)
+  })
 
   it('supports empty inner tag', () => {
     const result = djanjucks.renderString(
@@ -65,10 +69,10 @@ false:true:3`);
       {
         items: []
       }
-    );
+    )
 
-    expect(result).toEqual('empty');
-  });
+    expect(result).toEqual('empty')
+  })
 
   it('reverses the array with the keyword', () => {
     const result = djanjucks.renderString(
@@ -76,8 +80,8 @@ false:true:3`);
       {
         items: ['1', '2', '3']
       }
-    );
+    )
 
-    expect(result).toEqual('321');
-  });
-});
+    expect(result).toEqual('321')
+  })
+})

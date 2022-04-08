@@ -1,4 +1,4 @@
-import djanjucks from '../../src';
+import djanjucks from '../../src'
 
 describe('default_if_none filter', () => {
   it('returns value if not null', () => {
@@ -7,9 +7,9 @@ describe('default_if_none filter', () => {
       {
         value: 'test'
       }
-    );
-    expect(result).toEqual('test');
-  });
+    )
+    expect(result).toEqual('test')
+  })
 
   it('returns value if value is falsy', () => {
     const result = djanjucks.renderString(
@@ -17,9 +17,9 @@ describe('default_if_none filter', () => {
       {
         value: ''
       }
-    );
-    expect(result).toEqual('');
-  });
+    )
+    expect(result).toEqual('')
+  })
 
   it('returns value if value is non string', () => {
     const result = djanjucks.renderString(
@@ -27,9 +27,9 @@ describe('default_if_none filter', () => {
       {
         value: 123
       }
-    );
-    expect(result).toEqual('123');
-  });
+    )
+    expect(result).toEqual('123')
+  })
 
   it('returns arf if value is null', () => {
     const result = djanjucks.renderString(
@@ -37,7 +37,7 @@ describe('default_if_none filter', () => {
       {
         value: null
       }
-    );
-    expect(result).toEqual('default');
-  });
-});
+    )
+    expect(result).toEqual('default')
+  })
+})

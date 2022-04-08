@@ -1,17 +1,17 @@
-import djanjucks, { runtime } from '../../src';
+import djanjucks from '../../src'
 
 describe('resetcycle tag', () => {
   it('throws error if no cycle is available', () => {
     expect(() => {
-      djanjucks.renderString('{% resetcycle %}');
-    }).toThrow('resetcycle: No named cycle in template.');
-  });
+      djanjucks.renderString('{% resetcycle %}')
+    }).toThrow('resetcycle: No named cycle in template.')
+  })
 
   it('throws error if no named cycle is available', () => {
     expect(() => {
-      djanjucks.renderString('{% cycle "a" "b" %}{% resetcycle undefined %}');
-    }).toThrow('resetcycle: No named cycle in template called "undefined".');
-  });
+      djanjucks.renderString('{% cycle "a" "b" %}{% resetcycle undefined %}')
+    }).toThrow('resetcycle: No named cycle in template called "undefined".')
+  })
 
   it('resets the last cycle', () => {
     const result = djanjucks.renderString(
@@ -19,9 +19,9 @@ describe('resetcycle tag', () => {
       {
         values: [0, 1, 2, 3]
       }
-    );
-    expect(result).toEqual('aaaa');
-  });
+    )
+    expect(result).toEqual('aaaa')
+  })
 
   it('resets the last cycle even if named', () => {
     const result = djanjucks.renderString(
@@ -29,9 +29,9 @@ describe('resetcycle tag', () => {
       {
         values: [0, 1, 2, 3]
       }
-    );
-    expect(result).toEqual('aaaa');
-  });
+    )
+    expect(result).toEqual('aaaa')
+  })
 
   it('resets the a named cycle', () => {
     const result = djanjucks.renderString(
@@ -39,9 +39,9 @@ describe('resetcycle tag', () => {
       {
         values: [0, 1, 2, 3]
       }
-    );
-    expect(result).toEqual('aaaa');
-  });
+    )
+    expect(result).toEqual('aaaa')
+  })
 
   it('resets the last cycle in a loop', () => {
     const result = djanjucks.renderString(
@@ -56,9 +56,9 @@ describe('resetcycle tag', () => {
       {
         values: [0, 1, 2, 3, 4]
       }
-    );
-    expect(result).toEqual('ab-c-a-b-c-');
-  });
+    )
+    expect(result).toEqual('ab-c-a-b-c-')
+  })
 
   it('resets the named cycle in a loop', () => {
     const result = djanjucks.renderString(
@@ -73,9 +73,9 @@ describe('resetcycle tag', () => {
       {
         values: [0, 1, 2, 3, 4]
       }
-    );
-    expect(result).toEqual('aa-a+a-a+a-');
-  });
+    )
+    expect(result).toEqual('aa-a+a-a+a-')
+  })
 
   it('resets the cycle in a loop', () => {
     const result = djanjucks.renderString(
@@ -91,7 +91,7 @@ describe('resetcycle tag', () => {
         outer: [0, 1],
         inner: [2, 3, 4]
       }
-    );
-    expect(result).toEqual('abaaba');
-  });
-});
+    )
+    expect(result).toEqual('abaaba')
+  })
+})

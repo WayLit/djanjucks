@@ -1,4 +1,4 @@
-import djanjucks from '../../src';
+import djanjucks from '../../src'
 
 describe('dictsort filter', () => {
   it('sorts an array by key', () => {
@@ -11,9 +11,9 @@ describe('dictsort filter', () => {
           { name: 'Jonny B Goode', age: 18 }
         ]
       }
-    );
-    expect(result).toEqual('231863');
-  });
+    )
+    expect(result).toEqual('231863')
+  })
 
   it('sorts an array by key with dot notation', () => {
     const result = djanjucks.renderString(
@@ -25,19 +25,23 @@ describe('dictsort filter', () => {
           { title: 'Alice', author: { name: 'Lewis', age: 33 } }
         ]
       }
-    );
-    expect(result).toEqual('LewisGeorgeKurt');
-  });
+    )
+    expect(result).toEqual('LewisGeorgeKurt')
+  })
 
   it('sorts arrays of arrays by index', () => {
     const result = djanjucks.renderString(
       '{% for items in list|dictsort:"0" %}{% for item in items %}{{ item }}{% endfor %}{% endfor %}',
       {
-        list: [['a', '42'], ['c', 'string'], ['b', 'foo']]
+        list: [
+          ['a', '42'],
+          ['c', 'string'],
+          ['b', 'foo']
+        ]
       }
-    );
-    expect(result).toEqual('a42bfoocstring');
-  });
+    )
+    expect(result).toEqual('a42bfoocstring')
+  })
 
   it('leaves keys that are identical in the original order', () => {
     const result = djanjucks.renderString(
@@ -49,7 +53,7 @@ describe('dictsort filter', () => {
           { age: 18, name: 'John' }
         ]
       }
-    );
-    expect(result).toEqual('236318');
-  });
-});
+    )
+    expect(result).toEqual('236318')
+  })
+})

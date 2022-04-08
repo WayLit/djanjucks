@@ -1,4 +1,4 @@
-import djanjucks from '../../src';
+import djanjucks from '../../src'
 
 describe('spaceless tag', () => {
   it('strips whitespaces between html tags', () => {
@@ -6,8 +6,8 @@ describe('spaceless tag', () => {
 <ul>
   <li>Test</li>
 </ul>
-{% endspaceless %}`);
+{% endspaceless %}`)
 
-    expect(result).toEqual('<ul><li>Test</li></ul>');
-  });
-});
+    expect(result).toEqual('<ul><li>Test</li></ul>')
+  })
+})

@@ -1,4 +1,4 @@
-import djanjucks from '../../src';
+import djanjucks from '../../src'
 
 describe('with tag', () => {
   it('creates the context', () => {
@@ -9,10 +9,10 @@ describe('with tag', () => {
           price: 100
         }
       }
-    );
+    )
 
-    expect(result).toEqual('100');
-  });
+    expect(result).toEqual('100')
+  })
 
   it('only makes available the context for the body', () => {
     const result = djanjucks.renderString(
@@ -22,10 +22,10 @@ describe('with tag', () => {
           price: 100
         }
       }
-    );
+    )
 
-    expect(result).toEqual('100');
-  });
+    expect(result).toEqual('100')
+  })
 
   it('temporarily overrides existing context variable names', () => {
     const result = djanjucks.renderString(
@@ -36,10 +36,10 @@ describe('with tag', () => {
         },
         total: 123
       }
-    );
+    )
 
-    expect(result).toEqual('100123');
-  });
+    expect(result).toEqual('100123')
+  })
 
   it('supports binding output to context', () => {
     const result = djanjucks.renderString(
@@ -50,10 +50,10 @@ describe('with tag', () => {
         },
         total: 123
       }
-    );
+    )
 
-    expect(result).toEqual('100123');
-  });
+    expect(result).toEqual('100123')
+  })
 
   it('fails when more than one argument is provided with verbose "as"', () => {
     expect(() => {
@@ -65,9 +65,9 @@ describe('with tag', () => {
             price: 20
           }
         }
-      );
-    }).toThrow('with: only one argument allowed when using "as"');
-  });
+      )
+    }).toThrow('with: only one argument allowed when using "as"')
+  })
 
   it('fails when no argument is passed after "as"', () => {
     expect(() => {
@@ -76,9 +76,9 @@ describe('with tag', () => {
           total: 100,
           price: 20
         }
-      });
-    }).toThrow('with: missing target argument after "as".');
-  });
+      })
+    }).toThrow('with: missing target argument after "as".')
+  })
 
   it('fails when more than one target is passed after "as"', () => {
     expect(() => {
@@ -90,7 +90,7 @@ describe('with tag', () => {
             price: 20
           }
         }
-      );
-    }).toThrow('with: too many arguments provided after "as".');
-  });
-});
+      )
+    }).toThrow('with: too many arguments provided after "as".')
+  })
+})

@@ -1,4 +1,4 @@
-import djanjucks from '../../src';
+import djanjucks from '../../src'
 
 const CITIES = [
   { name: 'Mumbai', population: '19,000,000', country: 'India' },
@@ -6,7 +6,7 @@ const CITIES = [
   { name: 'New York', population: '20,000,000', country: 'USA' },
   { name: 'Chicago', population: '7,000,000', country: 'USA' },
   { name: 'Tokyo', population: '33,000,000', country: 'Japan' }
-];
+]
 
 const CITIES_WITH_OBJECT = [
   {
@@ -34,7 +34,7 @@ const CITIES_WITH_OBJECT = [
     population: '33,000,000',
     country: { name: 'Japan', color: 'yellow' }
   }
-];
+]
 
 describe('regroup tag', () => {
   it('parses arguments without output', () => {
@@ -43,25 +43,25 @@ describe('regroup tag', () => {
       {
         cities: CITIES
       }
-    );
-    expect(result).toEqual('');
-  });
+    )
+    expect(result).toEqual('')
+  })
 
   it('fails when missing "by" keyword', () => {
     expect(() => {
       djanjucks.renderString('{% regroup cities as country_list %}', {
         cities: CITIES
-      });
-    }).toThrow();
-  });
+      })
+    }).toThrow()
+  })
 
   it('fails when missing "as" keyword', () => {
     expect(() => {
       djanjucks.renderString('{% regroup cities by country %}', {
         cities: CITIES
-      });
-    }).toThrow();
-  });
+      })
+    }).toThrow()
+  })
 
   it('adds target to main context', () => {
     const result = djanjucks.renderString(
@@ -80,9 +80,9 @@ describe('regroup tag', () => {
       {
         cities: CITIES
       }
-    );
-    expect(result).toMatchSnapshot();
-  });
+    )
+    expect(result).toMatchSnapshot()
+  })
 
   it('allows grouping with dot notation', () => {
     const result = djanjucks.renderString(
@@ -102,7 +102,7 @@ describe('regroup tag', () => {
       {
         cities: CITIES_WITH_OBJECT
       }
-    );
-    expect(result).toMatchSnapshot();
-  });
-});
+    )
+    expect(result).toMatchSnapshot()
+  })
+})

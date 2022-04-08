@@ -1,20 +1,20 @@
-import djanjucks from '../../src';
+import djanjucks from '../../src'
 
 describe('add filter', () => {
   it('concats strings', () => {
-    const result = djanjucks.renderString('{{ "Hello"|add:"World" }}');
-    expect(result).toEqual('HelloWorld');
-  });
+    const result = djanjucks.renderString('{{ "Hello"|add:"World" }}')
+    expect(result).toEqual('HelloWorld')
+  })
 
   it('adds numbers', () => {
-    const result = djanjucks.renderString('{{ 1|add:3 }}');
-    expect(result).toEqual('4');
-  });
+    const result = djanjucks.renderString('{{ 1|add:3 }}')
+    expect(result).toEqual('4')
+  })
 
   it('parses string numbers', () => {
-    const result = djanjucks.renderString('{{ 1|add:"3" }}');
-    expect(result).toEqual('4');
-  });
+    const result = djanjucks.renderString('{{ 1|add:"3" }}')
+    expect(result).toEqual('4')
+  })
 
   it('concats arrays', () => {
     const result = djanjucks.renderString(
@@ -23,7 +23,7 @@ describe('add filter', () => {
         first: ['first'],
         second: ['second']
       }
-    );
-    expect(result).toEqual('first:second');
-  });
-});
+    )
+    expect(result).toEqual('first:second')
+  })
+})
